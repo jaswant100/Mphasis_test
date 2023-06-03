@@ -1,10 +1,10 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit'
 
-import counterReducer from './features/table/tableSlice'
+import tableReducer from './features/components/tableSlice'
 
 export function makeStore() {
   return configureStore({
-    reducer: { counter: counterReducer },
+    reducer: { tablecounter: tableReducer },
   })
 }
 

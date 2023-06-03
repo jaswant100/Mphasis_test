@@ -7,12 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
-import { useAppSelector, useAppDispatch } from '../../hooks'
-import {
-  fetchdataAsync,
-  selectData,
-} from './tableSlice'
-import styles from './Table.module.css'
+import Link from 'next/link';
 
 interface Column {
   id: 'name' | 'age' | 'gender' | 'phone' | 'dob';
@@ -45,6 +40,7 @@ const columns: Column[] = [
   },
 ];
 interface Data {
+  id: number,
   name: string,
   age: number,
   gender: string,
@@ -53,6 +49,7 @@ interface Data {
 }
 
 function createData(
+  id: number,
   firstName: string,
   lastName: string,
   maidenName: string,
@@ -62,19 +59,16 @@ function createData(
   dob: any
 ): Data {
   let name = `${firstName} ${lastName} ${maidenName}`
-  return { name, age, gender, phone, dob };
+  return { id, name, age, gender, phone, dob };
 }
 
-function ColumnGroupingTable() {
-  const dispatch = useAppDispatch()
-  const data = useAppSelector(selectData);
-  const rows = data?.userdata?.users.map((data1: any) => {
-    return createData(data1.firstName, data1.lastName, data1.maidenName, data1.age, data1.gender, data1.phone, data1.birthDate)
+function ColumnGroupingTable({ data }: any) {
+  let rows = data?.users.map((data1: any) => {
+    return createData(data1.id, data1.firstName, data1.lastName, data1.maidenName, data1.age, data1.gender, data1.phone, data1.birthDate)
   }
   )
-  useEffect(() => {
-    dispatch(fetchdataAsync())
-  }, []);
+  let limit = data ? data?.total : 100
+
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -111,13 +105,16 @@ function ColumnGroupingTable() {
               .map((row: any) => {
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={row.name}>
-                    {columns.map((column) => {
+                    {columns.map((column, i) => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
+                          {i === 0 ? <Link
+                            href={{
+                              pathname: '/profile',
+                              query: { id: row.id }
+                            }}
+                          >{value}</Link> : value}
                         </TableCell>
                       );
                     })}
@@ -130,7 +127,7 @@ function ColumnGroupingTable() {
       <TablePagination
         rowsPerPageOptions={[10, 25, 100]}
         component="div"
-        count={100}
+        count={limit}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}
