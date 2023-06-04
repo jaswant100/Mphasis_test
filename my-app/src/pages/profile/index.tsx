@@ -17,7 +17,7 @@ const Page: NextPage = () =>{
     const data = useAppSelector(selectData);
     let rows = data?.users.filter((data2:any)=>data2.id == id)
     useEffect(() => {
-      dispatch(fetchdataAsync())
+      //dispatch(fetchdataAsync()) // for refresh page
     }, []);
     return(
       <>
