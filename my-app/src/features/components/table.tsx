@@ -63,12 +63,13 @@ function createData(
 }
 
 function ColumnGroupingTable({ data }: any) {
+  
+
   let rows = data?.users.map((data1: any) => {
     return createData(data1.id, data1.firstName, data1.lastName, data1.maidenName, data1.age, data1.gender, data1.phone, data1.birthDate)
   }
   )
   let limit = data ? data?.total : 100
-
 
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(10);
@@ -85,14 +86,14 @@ function ColumnGroupingTable({ data }: any) {
   return (
     <Paper sx={{ width: '100%' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table aria-label="sticky table">
           <TableHead>
             <TableRow>
-              {columns.map((column) => (
+              {columns.map((column,i) => (
                 <TableCell
                   key={column.id}
                   align={column.align}
-                  style={{ minWidth: column.minWidth }}
+                  style={i===0?{position: 'sticky',left:0,background:'white',minWidth: column.minWidth}:{ minWidth: column.minWidth }}
                 >
                   {column.label}
                 </TableCell>
@@ -108,7 +109,7 @@ function ColumnGroupingTable({ data }: any) {
                     {columns.map((column, i) => {
                       const value = row[column.id];
                       return (
-                        <TableCell key={column.id} align={column.align}>
+                        <TableCell key={column.id} align={column.align} style={i===0?{position: 'sticky',left:0,background:'white'}:{}}>
                           {i === 0 ? <Link
                             href={{
                               pathname: '/profile',

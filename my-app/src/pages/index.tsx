@@ -3,7 +3,6 @@ import ColumnGroupingTable from '../features/components/table'
 import styles from '../styles/Home.module.css'
 import { useAppSelector, useAppDispatch } from './../hooks'
 import {
-  fetchdataAsync,
   selectData,loadata
 } from '../features/components/tableSlice'
 import { useEffect } from 'react'
