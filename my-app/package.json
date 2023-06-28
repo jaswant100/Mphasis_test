@@ -6,7 +6,7 @@
     "type-check": "tsc",
     "test": "jest",
     "dev": "concurrently \"npm run server\" \"next start\"",
-    "server": "node server.js"
+    "server": "node index.js"
   },
   "dependencies": {
     "@emotion/react": "^11.11.0",
