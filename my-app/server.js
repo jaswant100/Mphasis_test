@@ -10,3 +10,4 @@ app.get("/USER_DETAILS", (req, resq) => {
 app.listen(5000, () => {
     console.log("app is running")
 })
+module.exports = app;
