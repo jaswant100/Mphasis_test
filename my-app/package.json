@@ -1,11 +1,11 @@
 {
   "private": true,
   "scripts": {
-    "build": "next build",
+    "build": "concurrently \"npm run server\" \"next build\"",
     "start": "next start",
     "type-check": "tsc",
     "test": "jest",
-    "dev": "concurrently \"npm run server\" \"next\"",
+    "dev": "concurrently \"npm run server\" \"next start\"",
     "server": "node server.js"
   },
   "dependencies": {
