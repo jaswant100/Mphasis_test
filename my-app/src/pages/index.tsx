@@ -12,7 +12,7 @@ import axios from 'axios'
 export const getStaticProps: GetStaticProps<{
   repo: any;
 }> = async () => {
-  const response = await axios.get('http://localhost:5000/USER_DETAILS');
+  const response = await axios.get('/USER_DETAILS');
   const repo =response.data
   return { props:{repo}}
 };
