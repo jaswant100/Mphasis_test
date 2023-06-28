@@ -8,22 +8,23 @@ import {
 } from '../../features/components/tableSlice'
 import { useEffect } from 'react'
 import RowAndColumnSpacing from '../../features/components/boxgrid'
+import Layout from './layout';
 
-const Page: NextPage = () =>{
-    const router = useRouter();
-    const query = router.query;
-    const id = query.id;
-    const dispatch = useAppDispatch()
-    const data = useAppSelector(selectData);
-    let rows = data?.users.filter((data2:any)=>data2.id == id)
-    useEffect(() => {
-      //dispatch(fetchdataAsync()) // for refresh page
-    }, []);
-    return(
-      <>
-        <RowAndColumnSpacing rows={rows}/>
-        <SimpleAccordion rows={rows}/>
-        </>
-    )
+const Page: NextPage = () => {
+  const router = useRouter();
+  const query = router.query;
+  const id = query.id;
+  const dispatch = useAppDispatch()
+  const data = useAppSelector(selectData);
+  let rows = data?.users.filter((data2: any) => data2.id == id)
+  useEffect(() => {
+    //dispatch(fetchdataAsync()) // for refresh page
+  }, []);
+  return (
+    <Layout>
+      <RowAndColumnSpacing rows={rows} />
+      <SimpleAccordion rows={rows} />
+    </Layout>
+  )
 }
 export default Page;

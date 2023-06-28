@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "concurrently \"npm run server\" \"next build\"",
+    "build": "next build",
     "start": "next start",
     "type-check": "tsc",
     "test": "jest",
