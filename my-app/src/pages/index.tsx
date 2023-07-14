@@ -9,7 +9,7 @@ import { useEffect } from 'react'
 import type { InferGetStaticPropsType, GetStaticProps } from 'next';
 import axios from 'axios'
 const serverUrl ='https://mphasis-test.vercel.app'
-const localhost = 'http://localhost:5000'
+const localhost = 'http://localhost:5001'
 
 export const getStaticProps: GetStaticProps<{
   repo: any;

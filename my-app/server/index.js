@@ -7,7 +7,7 @@ app.get("/USER_DETAILS", (req, resq) => {
         userdata
     })
 })
-app.listen(5000, () => {
+app.listen(5001, () => {
     console.log("app is running")
 })
 module.exports = app;
